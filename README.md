@@ -6,13 +6,13 @@
 
 [![List](https://img.shields.io/badge/list-curated-fc60a8?style=flat-square&logo=awesomelists&logoColor=white)](#the-ranked-list)
 [![Last updated](https://img.shields.io/badge/updated-November%202026-blue?style=flat-square)](#how-we-ranked)
-[![Entries](https://img.shields.io/badge/entries-25-informational?style=flat-square)](#at-a-glance)
+[![Entries](https://img.shields.io/badge/entries-24-informational?style=flat-square)](#at-a-glance)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey?style=flat-square)](LICENSE)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 
 </div>
 
-Best Memory Plugins ranks 25 plugins and extensions that give a coding agent persistent memory between sessions: what it decided, what failed, what the codebase looks like. If you are looking for a Claude Code memory plugin, this list puts claude-mem, Supermemory, Hindsight, Mem0 and 20 others side by side, along with how each one captures memory (hooks on every turn, or a tool the agent has to remember to call), where it stores it, and whether it also covers Codex, Cursor and other agents. The memory each agent ships on its own (Claude Code auto memory, Codex memories, Copilot Memory and others) is compared separately, because it is what every plugin here builds on or replaces.
+Best Memory Plugins ranks 24 plugins and extensions that give a coding agent persistent memory between sessions: what it decided, what failed, what the codebase looks like. If you are looking for a Claude Code memory plugin, this list puts claude-mem, Supermemory, Hindsight, Mem0 and 19 others side by side, along with how each one captures memory (hooks on every turn, or a tool the agent has to remember to call), where it stores it, and whether it also covers Codex, Cursor and other agents. The memory each agent ships on its own (Claude Code auto memory, Codex memories, Copilot Memory and others) is compared separately, because it is what every plugin here builds on or replaces.
 
 **Short answer.** For a team that wants one memory across everyone's agents, Glen. For a solo Claude Code user who wants automatic local capture, claude-mem (switch its observer to local). For hook-driven recall on every prompt across four agents, Supermemory. For no LLM and no cloud at all, deja-vu or projectmem.
 
@@ -36,7 +36,7 @@ Star badges are live. Where a plugin lives inside a larger monorepo, the badge c
 
 | # | Plugin | Hosted or local | Memory stored as | Capture | Team sharing | License | Stars |
 |---|---|---|---|---|---|---|---|
-| 1 | [Glen](https://tryglen.com) | Hosted | Shards and observations on Glen's servers | Hooks every turn; recall every prompt (on demand in Cursor, Grok) | Org-wide, access checked per observation | Plugin MIT; hosted service | [![Website](https://img.shields.io/badge/site-tryglen.com-111111?style=flat-square)](https://tryglen.com) |
+| 1 | [Glen](https://tryglen.com) | Hosted | Shards and observations on Glen's servers | Hooks every turn; recall every prompt (on demand in Cursor, Grok) | Org-wide, access checked per observation | Plugin MIT; hosted service | [site](https://tryglen.com) |
 | 2 | [claude-mem](https://github.com/thedotmack/claude-mem) | Local; hosted observer by default | SQLite FTS5 + Chroma | Six lifecycle hooks | Opt-in TeamBrain | Apache-2.0 | ![](https://img.shields.io/github/stars/thedotmack/claude-mem?style=flat-square&label=) |
 | 3 | [Supermemory](https://github.com/supermemoryai/claude-supermemory) | Hosted; self-host option | Supermemory cloud container | Hooks; search on every prompt | Team-named namespace | MIT (README badge) | ![](https://img.shields.io/github/stars/supermemoryai/claude-supermemory?style=flat-square&label=) |
 | 4 | [Hindsight](https://github.com/vectorize-io/hindsight) | Cloud default; self-host or local daemon | Per-repo bank (Postgres + pgvector) | Hooks; synthesis on first prompt | One bank for all agents; Cloud teams | MIT | ![](https://img.shields.io/github/stars/vectorize-io/hindsight?style=flat-square&label=) |
@@ -59,12 +59,11 @@ Star badges are live. Where a plugin lives inside a larger monorepo, the badge c
 | 21 | [Zep Context plugin](https://github.com/getzep/zep-context-plugin) | Hosted | Temporal knowledge graph | Tool calls guided by a skill | Shared Context Graphs | Plugin Apache-2.0; cloud proprietary | ![](https://img.shields.io/github/stars/getzep/zep-context-plugin?style=flat-square&label=) |
 | 22 | [Serena](https://github.com/oraios/serena) | Local | Not documented | Agent calls a tool | Not documented | GPL-3.0-or-later (app) | ![](https://img.shields.io/github/stars/oraios/serena?style=flat-square&label=) |
 | 23 | [Pieces](https://pieces.app) | Local (desktop app) | PiecesOS on-device store | OS-level capture; recall over MCP | Enterprise plan | Proprietary | closed source |
-| 24 | [Cursor Memory Bank](https://github.com/vanzan01/cursor-memory-bank) | Local, in the repo | `.cursor` rules and commands | Rules and commands you run | Through git | No license file | ![](https://img.shields.io/github/stars/vanzan01/cursor-memory-bank?style=flat-square&label=) |
-| 25 | [Cline Memory Bank](https://docs.cline.bot/prompting/cline-memory-bank) | Local, in the repo | Six Markdown files in `memory-bank/` | You ask Cline to update | Through git | Docs pattern | ![](https://img.shields.io/github/stars/nickbaumann98/cline_docs?style=flat-square&label=) |
+| 24 | [Cline Memory Bank](https://docs.cline.bot/prompting/cline-memory-bank) | Local, in the repo | Six Markdown files in `memory-bank/` | You ask Cline to update | Through git | Docs pattern | ![](https://img.shields.io/github/stars/nickbaumann98/cline_docs?style=flat-square&label=) |
 
 ## How we ranked
 
-Glen's first place is the maintainer's pick. Entries 2 to 25 are ordered on these criteria, read from each project's README, docs, pricing page and the GitHub API in early November 2026:
+Glen's first place is the maintainer's pick. Entries 2 to 24 are ordered on these criteria, read from each project's README, docs, pricing page and the GitHub API in early November 2026:
 
 1. **Maintained.** A commit or release in the last 6 months. Archived, retired and stale plugins go to [Deprecated or not recommended](#deprecated-or-not-recommended).
 2. **Ships a memory plugin for a coding agent.** A plugin, extension, hook set or documented rules pattern that installs into the agent. Projects that reach coding agents only through a generic MCP connection (MemOS, Memori) or index code rather than conversations (`DeusData/codebase-memory-mcp`, `zilliztech/claude-context`) are left out. The [Best Agent Memory MCP](https://github.com/Glen-Web-App/best-agent-memory-mcp) list covers MCP-only servers.
@@ -667,27 +666,7 @@ The Long-Term Memory engine in PiecesOS captures workflow context at the operati
 
 **Best for:** developers who want one desktop-wide memory shared by every tool they use.
 
-### 24. Cursor Memory Bank
-
-[![Stars](https://img.shields.io/github/stars/vanzan01/cursor-memory-bank?style=flat-square&label=stars)](https://github.com/vanzan01/cursor-memory-bank)
-![Last commit](https://img.shields.io/github/last-commit/vanzan01/cursor-memory-bank?style=flat-square)
-
-Copy a `.cursor` folder of rules and commands into the project; v0.8 moved to Cursor 2.0 commands and deprecated the old custom modes ([README](https://github.com/vanzan01/cursor-memory-bank)).
-
-**Key facts:** Cursor only · files live in the repo and travel through git · last push 2026-05-26.
-
-**Strengths**
-- No service, no install, no account.
-- Memory files are versioned with the code.
-
-**Weaknesses**
-- No license file.
-- Slow activity: last push 2026-05-26.
-- A rules pattern depends on the model following the rules.
-
-**Best for:** Cursor users who want a structured, file-based memory with no extra software.
-
-### 25. Cline Memory Bank
+### 24. Cline Memory Bank
 
 [![Stars](https://img.shields.io/github/stars/nickbaumann98/cline_docs?style=flat-square&label=origin%20repo%20stars)](https://github.com/nickbaumann98/cline_docs)
 
@@ -732,7 +711,7 @@ Built-ins cover per-user notes well. The plugins above earn their place with cro
 
 ## Deprecated or not recommended
 
-Not counted in the 25.
+Not counted in the 24.
 
 - **[ByteRover CLI](https://github.com/campfirein/byterover-cli) (formerly Cipher) and [brv-claude-plugin](https://github.com/campfirein/brv-claude-plugin):** the CLI repo is archived on GitHub (last commit 2026-06-25) with no public explanation, it is licensed under the Elastic License 2.0 (source-available, not OSI), and the plugin's recall hook can block a prompt for 6 to 8 seconds. The npm package is still published.
 - **Hindsight `hindsight-memory` Claude Code plugin:** retired; Vectorize points to `@vectorize-io/hindsight-coding-agents` (entry 4).
@@ -741,6 +720,7 @@ Not counted in the 25.
 - **[alioshr/memory-bank-mcp](https://github.com/alioshr/memory-bank-mcp):** no push since 2025-08-20.
 - **[coleam00/mcp-mem0](https://github.com/coleam00/mcp-mem0):** a template with no push since 2025-04-13.
 - **[ConPort](https://github.com/GreatScottyMac/context-portal):** no push since 2026-01-27, and Claude Code is not among its documented clients.
+- **[Cursor Memory Bank](https://github.com/vanzan01/cursor-memory-bank):** no commit since 2026-01-07 and no release since 2025-12-05, and it has no license file.
 
 ## FAQ
 
@@ -774,7 +754,7 @@ By default: Glen, Supermemory, Mem0, Hindsight (cloud mode), Claude Subconscious
 
 ### What is the best memory plugin for Codex or Cursor?
 
-For Codex with hooks on every prompt: Glen. Others with Codex hooks or plugins: Hindsight, agentmemory, Mem0, Cognee, mcp-memory-service, MemPalace and Episodic Memory. For Cursor: Glen, agentmemory and MemPalace capture automatically; Supermemory has a young Cursor plugin; Cursor Memory Bank is the file-based option.
+For Codex with hooks on every prompt: Glen. Others with Codex hooks or plugins: Hindsight, agentmemory, Mem0, Cognee, mcp-memory-service, MemPalace and Episodic Memory. For Cursor: Glen, agentmemory and MemPalace capture automatically; Supermemory has a young Cursor plugin.
 
 ## Related
 
