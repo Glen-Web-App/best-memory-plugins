@@ -60,6 +60,7 @@ Star badges are live. Where a plugin lives inside a larger monorepo, the badge c
 | 22 | [Serena](https://github.com/oraios/serena) | Local | Not documented | Agent calls a tool | Not documented | GPL-3.0-or-later (app) | ![](https://img.shields.io/github/stars/oraios/serena?style=flat-square&label=) |
 | 23 | [Pieces](https://pieces.app) | Local (desktop app) | PiecesOS on-device store | OS-level capture; recall over MCP | Enterprise plan | Proprietary | closed source |
 | 24 | [Cline Memory Bank](https://docs.cline.bot/prompting/cline-memory-bank) | Local, in the repo | Six Markdown files in `memory-bank/` | You ask Cline to update | Through git | Docs pattern | ![](https://img.shields.io/github/stars/nickbaumann98/cline_docs?style=flat-square&label=) |
+| 25 | [SageOx ox](https://github.com/sageox/ox) | Hosted | Git repository on sageox.ai (LFS blobs); local cache first | Hooks record each session; context loads at session start | Team-wide shared history | CLI MIT; hosted service | ![](https://img.shields.io/github/stars/sageox/ox?style=flat-square&label=) |
 
 ## How we ranked
 
@@ -683,6 +684,36 @@ Cline's official docs pattern: custom instructions in `.clinerules/memory-bank.m
 - Reading every file on every task costs tokens.
 
 **Best for:** Cline users who want a shared, reviewable project brief in the repo.
+
+### 25. SageOx ox
+
+[![Stars](https://img.shields.io/github/stars/sageox/ox?style=flat-square&label=stars)](https://github.com/sageox/ox)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/sageox/ox?style=flat-square)
+
+Sessions record by default and sync to one team history, so recall covers teammates' sessions in other agents and not only your own ([README](https://github.com/sageox/ox#what-gets-recorded)). Agent hooks capture prompts, responses and tool calls. `ox agent prime` loads team conventions, decisions and prior sessions when a session starts, and `ox query` searches them on demand ([README](https://github.com/sageox/ox#how-it-works)).
+
+**Key facts:** hooks or plugin for Claude Code, Codex CLI, Gemini CLI, Droid, OpenCode, Amp and Goose; instruction files for Pi and Aider; Cursor, Windsurf, Cline, Copilot and Kiro get context loading only, with recording marked planned ([README](https://github.com/sageox/ox#works-with-your-coding-agent)) · sessions go to `~/.cache/sageox/`, then to a git repository hosted on sageox.ai, content as LFS blobs ([README](https://github.com/sageox/ox#where-it-goes)) · free for teams under 10 people, larger plans priced on request ([pricing](https://sageox.ai/pricing)) · CLI is MIT ([LICENSE](https://github.com/sageox/ox/blob/main/LICENSE)).
+
+```bash
+brew install sageox/tap/ox
+ox login
+ox init
+```
+
+**Strengths**
+- Team sharing is the default, not an add-on: one history for every teammate's agent ([README](https://github.com/sageox/ox#who-can-read-it)).
+- The same recorded context loads into, and is searchable from, each supported agent ([README](https://github.com/sageox/ox#works-with-your-coding-agent)).
+- Secrets are redacted locally before anything is stored or uploaded ([README](https://github.com/sageox/ox#what-is-redacted-before-upload)).
+
+**Weaknesses**
+- Hosted only. The README says there is no self-hosted or local-only ledger in the current version ([README](https://github.com/sageox/ox#where-it-goes)).
+- Recording is on by default and sessions upload to sageox.ai. Teammates can read your sessions, and there are no finer per-session privacy controls beyond turning recording off ([README](https://github.com/sageox/ox#who-can-read-it)).
+- Session capture does not respect `.gitignore`; the redaction patterns are the only filter ([README](https://github.com/sageox/ox#what-is-redacted-before-upload)).
+- Cursor, Windsurf, Cline, Copilot and Kiro sessions are not recorded yet ([README](https://github.com/sageox/ox#works-with-your-coding-agent)).
+- Needs a sageox.ai account (`ox login`, [README](https://github.com/sageox/ox#quickstart)). No retrieval benchmarks are published.
+
+**Best for:** small teams running more than one coding agent who want shared session history and accept a hosted store.
 
 ## Built-in agent memory (not ranked)
 
