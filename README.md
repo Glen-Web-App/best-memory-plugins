@@ -6,13 +6,13 @@
 
 [![List](https://img.shields.io/badge/list-curated-fc60a8?style=flat-square&logo=awesomelists&logoColor=white)](#the-ranked-list)
 [![Last updated](https://img.shields.io/badge/updated-November%202026-blue?style=flat-square)](#how-we-ranked)
-[![Entries](https://img.shields.io/badge/entries-24-informational?style=flat-square)](#at-a-glance)
+[![Entries](https://img.shields.io/badge/entries-25-informational?style=flat-square)](#at-a-glance)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey?style=flat-square)](LICENSE)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 
 </div>
 
-Best Memory Plugins ranks 24 plugins and extensions that give a coding agent persistent memory between sessions: what it decided, what failed, what the codebase looks like. If you are looking for a Claude Code memory plugin, this list puts claude-mem, Supermemory, Hindsight, Mem0 and 19 others side by side, along with how each one captures memory (hooks on every turn, or a tool the agent has to remember to call), where it stores it, and whether it also covers Codex, Cursor and other agents. The memory each agent ships on its own (Claude Code auto memory, Codex memories, Copilot Memory and others) is compared separately, because it is what every plugin here builds on or replaces.
+Best Memory Plugins ranks 25 plugins and extensions that give a coding agent persistent memory between sessions: what it decided, what failed, what the codebase looks like. If you are looking for a Claude Code memory plugin, this list puts claude-mem, Supermemory, Hindsight, Mem0 and 21 others side by side, along with how each one captures memory (hooks on every turn, or a tool the agent has to remember to call), where it stores it, and whether it also covers Codex, Cursor and other agents. The memory each agent ships on its own (Claude Code auto memory, Codex memories, Copilot Memory and others) is compared separately, because it is what every plugin here builds on or replaces.
 
 **Short answer.** For a team that wants one memory across everyone's agents, Glen. For a solo Claude Code user who wants automatic local capture, claude-mem (switch its observer to local). For hook-driven recall on every prompt across four agents, Supermemory. For no LLM and no cloud at all, deja-vu or projectmem.
 
@@ -60,10 +60,11 @@ Star badges are live. Where a plugin lives inside a larger monorepo, the badge c
 | 22 | [Serena](https://github.com/oraios/serena) | Local | Not documented | Agent calls a tool | Not documented | GPL-3.0-or-later (app) | ![](https://img.shields.io/github/stars/oraios/serena?style=flat-square&label=) |
 | 23 | [Pieces](https://pieces.app) | Local (desktop app) | PiecesOS on-device store | OS-level capture; recall over MCP | Enterprise plan | Proprietary | closed source |
 | 24 | [Cline Memory Bank](https://docs.cline.bot/prompting/cline-memory-bank) | Local, in the repo | Six Markdown files in `memory-bank/` | You ask Cline to update | Through git | Docs pattern | ![](https://img.shields.io/github/stars/nickbaumann98/cline_docs?style=flat-square&label=) |
+| 25 | [ClickHouse Loom](https://github.com/ClickHouse/loom) | Self-hosted | ClickHouse; optional Postgres | Session hooks; recall at start and first qualifying prompt | Namespace-scoped roles | Apache-2.0 | ![](https://img.shields.io/github/stars/ClickHouse/loom?style=flat-square&label=) |
 
 ## How we ranked
 
-Glen's first place is the maintainer's pick. Entries 2 to 24 are ordered on these criteria, read from each project's README, docs, pricing page and the GitHub API in early November 2026:
+Glen's first place is the maintainer's pick. Entries 2 to 25 are ordered on these criteria, read from each project's README, docs, pricing page and the GitHub API in November 2026:
 
 1. **Maintained.** A commit or release in the last 6 months. Archived, retired and stale plugins go to [Deprecated or not recommended](#deprecated-or-not-recommended).
 2. **Ships a memory plugin for a coding agent.** A plugin, extension, hook set or documented rules pattern that installs into the agent. Projects that reach coding agents only through a generic MCP connection (MemOS, Memori) or index code rather than conversations (`DeusData/codebase-memory-mcp`, `zilliztech/claude-context`) are left out. The [Best Agent Memory MCP](https://github.com/Glen-Web-App/best-agent-memory-mcp) list covers MCP-only servers.
@@ -684,6 +685,35 @@ Cline's official docs pattern: custom instructions in `.clinerules/memory-bank.m
 
 **Best for:** Cline users who want a shared, reviewable project brief in the repo.
 
+### 25. ClickHouse Loom
+
+[![Stars](https://img.shields.io/github/stars/ClickHouse/loom?style=flat-square&label=stars)](https://github.com/ClickHouse/loom)
+![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/ClickHouse/loom?style=flat-square)
+
+Session hooks send tool observations and chat turns to a configured Loom server, while SessionStart loads shared context. Claude Code and Codex ship plugins using the same capture scripts ([Claude Code](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md), [Codex](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/codex.md)). The star badge covers the whole Loom repository.
+
+**Key facts:** self-hosted Loom + ClickHouse, optional Postgres for live memory · namespace-scoped read/write roles · Apache-2.0 ([README](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md), [license](https://github.com/ClickHouse/loom/blob/v1.3.0/LICENSE)). Memory recall runs at session start and, by default, once on the first qualifying prompt; recall on every qualifying prompt is opt-in ([recall policy](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#claude-does-not-call-loom-tools)).
+
+With a Loom server already running, install the Claude Code plugin:
+
+```bash
+claude plugin marketplace add ClickHouse/loom
+claude plugin install loom@loom
+```
+
+The plugin defaults to a local server; configure the server URL and a writer token for a shared deployment ([installation](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#install)). Hooks send prompts, tool inputs/outputs and session text to that server. Server-side LLM and embedding providers receive text only when configured by the operator ([data handling](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#data-handling)).
+
+**Strengths**
+- Automatic tool observations, working-memory notes and session briefs across sessions ([hooks](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#what-the-hooks-do)).
+- Shared memory with separate credentials and namespace access roles ([README](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md)).
+
+**Weaknesses**
+- Needs a running server, ClickHouse and Node.js 18+; Claude Code requires version 2.1.139+ ([requirements](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#requirements)).
+- Turning conversation logging off does not stop session-memory extraction from retaining its source turns. Meaningful fact extraction needs a configured LLM because the stock fake LLM does not perform it ([data handling](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#data-handling), [model setup](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md#2-configure-models-and-api-keys)).
+
+**Best for:** teams that want hook-based session capture into a memory server they operate.
+
 ## Built-in agent memory (not ranked)
 
 Every major agent now ships some memory of its own. These are not plugins, so they are not ranked, but they decide whether you need one.
@@ -711,7 +741,7 @@ Built-ins cover per-user notes well. The plugins above earn their place with cro
 
 ## Deprecated or not recommended
 
-Not counted in the 24.
+Not counted in the 25.
 
 - **[ByteRover CLI](https://github.com/campfirein/byterover-cli) (formerly Cipher) and [brv-claude-plugin](https://github.com/campfirein/brv-claude-plugin):** the CLI repo is archived on GitHub (last commit 2026-06-25) with no public explanation, it is licensed under the Elastic License 2.0 (source-available, not OSI), and the plugin's recall hook can block a prompt for 6 to 8 seconds. The npm package is still published.
 - **Hindsight `hindsight-memory` Claude Code plugin:** retired; Vectorize points to `@vectorize-io/hindsight-coding-agents` (entry 4).
