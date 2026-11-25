@@ -706,7 +706,8 @@ The plugin defaults to a local server; configure the server URL and a writer tok
 
 **Strengths**
 - Automatic tool observations, working-memory notes and session briefs across sessions ([hooks](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#what-the-hooks-do)).
-- Shared memory with separate credentials and namespace access roles ([README](https://github.com/ClickHouse/loom/blob/v1.3.0/README.md)).
+- Shared memory with separate credentials and namespace access roles. The [cross-client walkthrough](https://loom.clickhouse.com/docs/getting-started/connect-a-coding-agent#verify-shared-memory-between-claude-code-and-codex) checks that a fresh Codex session can read a decision saved in Claude Code.
+- With a populated code index, [saved lessons can link to definitions](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/concepts/memory.md#memories-linked-to-code). The [code-change walkthrough](https://loom.clickhouse.com/docs/use-cases/memory-linked-to-code#check-a-lesson-after-a-code-edit) checks the link after a commit changes the indexed definition.
 
 **Weaknesses**
 - Needs a running server, ClickHouse and Node.js 18+; Claude Code requires version 2.1.139+ ([requirements](https://github.com/ClickHouse/loom/blob/v1.3.0/docs/features/integrations/claude-code.md#requirements)).
